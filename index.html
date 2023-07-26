@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Art Gallery</title>
+  <script src="scroll.js"></script>
+  <script src="javascript.js"></script>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    /* Style the page layout */
+    .newcontainer {
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('images/backgroundimg.jfif');
+        background-size:cover;
+        background-position:center;
+        background-repeat: no-repeat;
+        margin-bottom: 290px;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+.newcontainer h1 {
+  color: white;
+  text-align: center;
+  margin-top: 10px;
+  font-size: 28px;
+  
+}
+
+.newcontainer nav {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.newcontainer ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.newcontainer ul li {
+  display: inline-block;
+  margin: 0 80px;
+}
+
+.newcontainer ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 48px;
+  
+}
+.newcontainer img{
+    border-radius: 200px;
+}
+
+
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px;
+      text-align: center;
+    }
+    .container h1{
+        font-size: 58px;
+        margin-bottom: 20px; 
+        margin-top: 20px;
+    }
+
+    h1 {
+      font-size: 58px;
+      margin-bottom: 200px;
+    }
+
+    p {
+      font-size: 20px;
+      margin-bottom: 40px;
+    }
+
+
+    .artworks-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 70px;
+      position: relative;
+      overflow: hidden;
+    }
+    .artwork {
+      width: 250px;
+      height: 200px;
+      margin-right: 40px;
+      background-color: #f2f2f2;
+      border-radius: 4px;
+      margin-bottom: 225px;
+    }
+    section {
+    margin-top: 50px;
+  }
+
+  h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  form div {
+    margin-bottom: 20px;
+  }
+
+  label {
+    font-size: 20px;
+    margin-right: 10px;
+  }
+
+  input,
+  textarea {
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    width: 300px;
+    max-width: 100%;
+  }
+
+  button[type="submit"] {
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .scroll-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      background-color: #333;
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+  .scroll-to-top:hover {
+      opacity: 0.8;
+    }
+  .show-scroll-button {
+      opacity: 1;
+    }
+    #myButton {
+            background-color: black;
+              color: white;
+              padding: 10px 20px;
+              border: none;
+              border-radius: 4px;
+              cursor: pointer;
+          }
+
+          #myButton:hover {
+              background-color: gray;
+          }
+
+</style>
+<!-- <script>
+  // Function to scroll to the top of the page
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // Function to toggle the visibility of the scroll button
+  function toggleScrollButton() {
+    var scrollButton = document.getElementById('scrollButton');
+    if (window.pageYOffset > 300) {
+      scrollButton.classList.add('show-scroll-button');
+    } else {
+      scrollButton.classList.remove('show-scroll-button');
+    }
+  }
+
+  // Add event listener to scroll button
+  document.addEventListener('DOMContentLoaded', function() {
+    var scrollButton = document.getElementById('scrollButton');
+    scrollButton.addEventListener('click', scrollToTop);
+    window.addEventListener('scroll', toggleScrollButton);
+  });
+ 
+</script>
+<script>
+  function myFunction() {
+    console.log("Print here")
+  }
+  </script> -->
+  
+</head>
+<body onload="insertProducts()">
+    
+    <div class="newcontainer">
+        <img src="images/AG.png" alt="" style="width: 80px; height: auto;"><br><hr style="width: 10%;">
+        <h1>Art Gallery</h1>
+        <nav>
+          <ul>
+            <li><a href="#shop">Shop.</a></li>
+            <li><a href="#about" onclick="scrollToAbout()">About.</a></li>
+            <li><a href="#contact">Contact.</a></li>
+          </ul>
+        </nav>
+        
+    </div>
+      
+      
+  <div class="container" >
+    <section id="shop">
+    <h1>Artworks.</h1>
+    <div class="artworks-container" id="artproductscontainer"></div>
+    </section>
+    <section id="about">
+        <h2>About <i class="fa fa-shopping-cart" aria-hidden="true"></i> </h2>
+        <p>I'm a paragraph. Click here to add your own text and edit me. It's easy. Just click “Edit Text” or double click me to add your own content and make changes to the font. Feel free to drag and drop me anywhere you like on your page. I’m a great place for you to tell a story and let your users know a little more about you. This is a great space to write long text about your company and your services.I'm a paragraph. Click here to add your own text and edit me. It’s easy. Just click “Edit Text” or double click me to add your own content and make changes to the font. Feel free to drag and drop me anywhere you like on your page. I’m a great place for you to tell a story and let your users know a little more about you. This is a great space to write long text about your company and your services.I'm a paragraph. Click here to add your own text and edit me. It’s easy. Just click “Edit Text” or double click me to add your own content and make changes to the font. Feel free to drag and drop me anywhere you like on your page. I’m a great place for you to tell a story and let your users know a little more about you. This is a great space to write long text about your company and your services.</p>
+    </section>
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <form>
+          <div>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div>
+            <label for="subject">Subject:</label>
+            <input type="text" id="subject" name="subject" required>
+          </div>
+          <div>
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+          </div>
+          <div>
+            <button type="submit">Submit</button>
+          </div>
+        </form>
+      </section>  
+</div>
+<div id="scrollButton" class="scroll-to-top">&#8593;</div>
+</body>
+</html>

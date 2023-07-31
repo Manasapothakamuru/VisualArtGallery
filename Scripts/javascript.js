@@ -1,64 +1,9 @@
-const artProducts = [{
-    "Id": 1,
-    "Name": "Artwork 1",
-    "Rating": "4.6",
-    "Price": "$50"
-
-},
-{
-    "Id": 2,
-    "Name": "Artwork 2",
-    "Rating": "4.9",
-    "Price": "$150"
-
-},
-{
-    "Id": 3,
-    "Name": "Artwork 3",
-    "Rating": "4.8",
-    "Price": "$250"
-
-},
-{
-    "Id": 4,
-    "Name": "Artwork 4",
-    "Rating": "4.4",
-    "Price": "$150"
-
-},
-{
-    "Id": 5,
-    "Name": "Artwork 5",
-    "Rating": "4.6",
-    "Price": "$350"
-
-},
-{
-    "Id": 6,
-    "Name": "Artwork 6",
-    "Rating": "4.6",
-    "Price": "$250"
-
-},
-{
-    "Id": 7,
-    "Name": "Artwork 7",
-    "Rating": "4.2",
-    "Price": "$150"
-
-},
-{
-    "Id": 8,
-    "Name": "Artwork 8",
-    "Rating": "4.0",
-    "Price": "$150"
-
-}]
+var artProducts = []
 //Take an empty array
 const emptyArr = [];
 
 
- 
+
 
 // Function to scroll to the top of the page
 function scrollToTop() {
@@ -82,9 +27,32 @@ document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('scroll', toggleScrollButton);
 });
 
-function myFunction() {
-    console.log("Print here")
-}
+function getData() {
+    //get api data
+
+    fetch('http://127.0.0.1:5000/getItems',
+    {
+            method: 'GET',
+            //mode: 'no-cors'
+            headers:{
+                Accept:'application/json',
+            },
+        },)
+        .then(response => {
+            console.log(response)
+            return response.json(); // Parse the response as JSON
+        })
+        .then(data => {
+            artProducts=data;
+            insertProducts(); // Process the response data here
+        })
+        .catch(error => {
+            console.error('Fetch request failed:', error);
+        });
+    }
+
+//fill response to empty arr
+//make a call to insertprod function
 
 function insertProducts() {
 
@@ -93,7 +61,7 @@ function insertProducts() {
         firstAnchor.href = "description.html"
 
         var artImage = new Image()
-        artImage.src = "images/art1.jpg"
+        artImage.src = "../images/art1.jpg"
         artImage.height = 200
         artImage.width = 250
 
@@ -108,25 +76,28 @@ function insertProducts() {
         secondAnchor.appendChild(artTitle)
 
         var price = document.createElement("p")
-        price.innerHTML = "Price:" +artProducts[i]["Price"] + "<br>Rating:"+ artProducts[i]["Rating"]
+        price.innerHTML = "Price:" + artProducts[i]["Price"] + "<br>Rating:" + artProducts[i]["Rating"]
+
 
         var addToCartButton = document.createElement("button")
         addToCartButton.type = "button"
         addToCartButton.id = artProducts[i]["Id"]
-        addToCartButton.innerHTML="Add to Cart"
+        addToCartButton.className = "addtoCartBtn"
+        addToCartButton.innerHTML = "Add to Cart"
 
         addToCartButton.addEventListener("click", function (e) {
-            var id = e.target.id;
+            var id = e.target.id; // to get location print e and open console and expand 
             //Clicked Item should be pushed to this empty array
-            let result=artProducts.filter(function(e){
-                return e.Id== id
+            let result = artProducts.filter(function (e) {
+                return e.Id == id
             });
-           emptyArr.push(result)
-           // convert empty array to string and store in local storage
-           const stringArr = JSON.stringify(emptyArr);
-           localStorage.setItem("Test1",stringArr)
+            emptyArr.push(result[0])
+            // convert empty array to string and store in local storage
+            const stringArr = JSON.stringify(emptyArr);
+            localStorage.setItem("Test1", stringArr)
 
         })
+
 
         var artWorkDiv = document.createElement('div')
         artWorkDiv.class = "artwork"
@@ -142,9 +113,11 @@ function insertProducts() {
 
     }
 
-    
+
     // create new HTML and JS file and fetch/ get storaged string and convert back to array and print on screen 
 }
+
+
 
 
 //   <div class="artwork">

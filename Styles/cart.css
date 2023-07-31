@@ -1,0 +1,31 @@
+
+    .cartContainer{
+        margin-top: 100px;
+        margin-left: 100px;
+        display: flex;
+        justify-content:start;
+        align-items: center;
+        width: 50%;
+        border: 1px solid black;
+        padding:2%;
+        border-radius: 25px;
+        background-color: lightgray;
+    } 
+    .alldescription{
+        display: flex;
+        flex-direction: column;
+        width: inherit;
+        padding-left: 6%;
+    }
+    .description{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .quantity{
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        
+    }

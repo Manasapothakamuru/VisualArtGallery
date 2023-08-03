@@ -33,11 +33,49 @@ def post_data():
     
    cursor = connection.cursor()
    data = request.get_json()
-   query=f"INSERT INTO products1(Name, Price, Rating ) VALUES ('{data['Name']}','{data['Price']}','{data['Rating']}')"
+   query=f"INSERT INTO products1(Name, Price, Rating, Category) VALUES ('{data['Name']}','{data['Price']}','{data['Rating']}','{data['Category']}')"
    cursor.execute(query)
    connection.commit()
    cursor.close()
    return "True"
+
+@app.route('/CartPostItems', methods=['POST'])
+def cartpost_data():
+    cursor = connection.cursor()
+    data = request.get_json()
+    query=f"INSERT INTO carttable(Name, Price, Rating ) VALUES ('{data['Name']}','{data['Price']}','{data['Rating']}')"
+    cursor.execute(query)
+    connection.commit()
+    cursor.close()
+    return "True"
+
+@app.route('/getCartItems')
+def getCart_data():
+    cursor = connection.cursor()
+
+    # Execute your MySQL query here
+    query = "SELECT * FROM carttable ;"
+    cursor.execute(query)
+
+    # Fetch the data and format as needed
+    result = cursor.fetchall()
+
+    cursor.close()
+    return result
+
+@app.route('/removeCartItems/<int:id>',methods=['DELETE'])
+def removeCartItems(id):
+    cursor = connection.cursor()
+
+    # Execute your MySQL query here
+    query = f"DELETE FROM carttable WHERE Id={id};"
+    cursor.execute(query)
+
+    # Fetch the data and format as needed
+    result = cursor.fetchall()
+    connection.commit()
+    cursor.close()
+    return result
 
     
 

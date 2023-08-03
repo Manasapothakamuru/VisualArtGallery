@@ -2,11 +2,13 @@ function newItem(){
     var name = document.getElementById("fname").value;
     var price = document.getElementById("price").value;
     var rating= document.getElementById("rating").value;
+    var category= document.getElementById("category").value;
     var reqObj={
         
         "Name": name,
         "Price":price,
-        "Rating":rating
+        "Rating":rating,
+        "Category":category
     }
 
     fetch("http://127.0.0.1:5000/postItems",{
@@ -18,6 +20,14 @@ function newItem(){
     })
     .then(json=>{console.log(json)
     //fetch
+    var nameDiv =  document.getElementById("fname");
+    nameDiv.value = ''
+    priceDiv = document.getElementById("price");
+    priceDiv.value=''
+    ratingDiv = document.getElementById("rating");
+    ratingDiv.value=''
+    categoryDiv = document.getElementById("category");
+    categoryDiv.value=''
 }
     );
 }

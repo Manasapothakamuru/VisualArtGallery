@@ -1,6 +1,7 @@
 var artProducts = []
 //Take an empty array
-const emptyArr = [];
+//const emptyArr = [];
+var masterArtProducts=[]
 
 
 
@@ -31,30 +32,57 @@ function getData() {
     //get api data
 
     fetch('http://127.0.0.1:5000/getItems',
-    {
+        {
             method: 'GET',
             //mode: 'no-cors'
-            headers:{
-                Accept:'application/json',
+            headers: {
+                Accept: 'application/json',
             },
         },)
         .then(response => {
-            console.log(response)
+            //console.log(response)
             return response.json(); // Parse the response as JSON
         })
         .then(data => {
-            artProducts=data;
+            artProducts = data;
+            masterArtProducts=data;
             insertProducts(); // Process the response data here
         })
         .catch(error => {
             console.error('Fetch request failed:', error);
         });
-    }
+}
 
 //fill response to empty arr
 //make a call to insertprod function
+function allartBtn(){
+    artProducts=masterArtProducts;
+    insertProducts()
+}
+
+function fineartBtn() {
+    result= masterArtProducts.filter(e=>e.Category == "fineart");
+    console.log(result)
+    artProducts=result;
+    insertProducts();
+}
+function decorativeartBtn(){
+    result = masterArtProducts.filter(e=>e.Category=="decorativeart")
+    artProducts=result;
+    insertProducts();
+}
+function commercialartBtn(){
+    result=masterArtProducts.filter(e=>e.Category=="commercialart")
+    artProducts=result;
+    insertProducts();
+}
+    // filter data 
+    // and assign to artproducts // arproducts = filteredData 
+
 
 function insertProducts() {
+    var artProductContainer = document.getElementById("artproductscontainer")
+    artProductContainer.innerHTML=""
 
     for (var i = 0; i < artProducts.length; i++) {
         var firstAnchor = document.createElement('a')
@@ -90,17 +118,35 @@ function insertProducts() {
             //Clicked Item should be pushed to this empty array
             let result = artProducts.filter(function (e) {
                 return e.Id == id
-            });
-            emptyArr.push(result[0])
-            // convert empty array to string and store in local storage
-            const stringArr = JSON.stringify(emptyArr);
-            localStorage.setItem("Test1", stringArr)
+                })
+                fetch("http://127.0.0.1:5000/CartPostItems",{
+                    method:"POST",
+                    body:JSON.stringify(result[0]),
+                    headers:{
+                        "Content-type": "application/json; charset=UTF-8"
+                    }
+                })
+                .then(response => response.json())
+                .then(data =>{
+                    result.textContent=JSON.stringify(data);
+                })
+                .catch(error =>{
+                    console.error('Error fetching data:',error);
+                });
+                
+            
+            //addCartItems(result)
+            
+            // emptyArr.push(result[0])
+            // // convert empty array to string and store in local storage
+            // const stringArr = JSON.stringify(emptyArr);
+            // localStorage.setItem("Test1", stringArr)
 
-        })
+        });
 
 
         var artWorkDiv = document.createElement('div')
-        artWorkDiv.class = "artwork"
+        artWorkDiv.className = "artwork"
 
         artWorkDiv.appendChild(firstAnchor)
         artWorkDiv.appendChild(secondAnchor)

@@ -94,7 +94,6 @@
 
     .artworks-container {
       display: flex;
-      justify-content: space-between;
       flex-wrap: wrap;
       margin-top: 70px;
       position: relative;
@@ -220,6 +219,34 @@
       right: 25px;
       z-index: 99999;
     }
+
+    .category {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+
+    }
+
+    .fineArtBtn,
+    .decorativeArtBtn,
+    .commercialArtBtn,
+    .allArtBtn {
+      background-color: black;
+      color: white;
+      border: none;
+      border-radius: 19px;
+      cursor: pointer;
+      pointer-events: visible;
+      padding: 10px 20px;
+      margin-right: 20px;
+    }
+
+    .fineArtBtn:hover,
+    .decorativeArtBtn:hover,
+    .commercialArtBtn:hover,
+    .allArtBtn:hover {
+      background-color: gray;
+    }
   </style>
 </head>
 
@@ -248,6 +275,20 @@
       <h1>Artworks.</h1>
       <div class="newBtn">
         <a href="addItemForm.html"><button type="button" class="newItemBtn">Add new item</button></a>
+      </div>
+      <div class="category">
+        <div class="all">
+          <a><button type="button" class="allArtBtn" onclick="allartBtn()">All Arts</button></a>
+        </div>
+        <div class="fineart">
+          <a><button type="button" class="fineArtBtn" onclick="fineartBtn()">Fine Art</button></a>
+        </div>
+        <div class="decorativeart">
+          <a><button type="button" class="decorativeArtBtn" onclick="decorativeartBtn()">Decorative Art</button></a>
+        </div>
+        <div class="commercialart">
+          <a><button type="button" class="commercialArtBtn" onclick="commercialartBtn()">Commercial Art</button></a>
+        </div>
       </div>
       <div class="artworks-container" id="artproductscontainer"></div>
     </section>
